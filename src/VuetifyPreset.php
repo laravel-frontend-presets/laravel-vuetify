@@ -24,32 +24,26 @@ class VuetifyPreset extends Preset
         static::updatePackages();
         static::removeSass(); // or static::updateLess()
         static::updateBootstrapping();
+        static::updateWelcomePage();
 
         if($withAuth)
         {
             static::addAuthTemplates(); // optional
         }
-        else
-        {
-            static::updateWelcomePage(); //optional
-        }
 
         static::removeNodeModules();
     }
 
-    /**
-     * Update the given package array.
-     *
-     * @param  array  $packages
-     * @return array
-     */
     protected static function updatePackageArray(array $packages)
     {
-        // packages to add to the package.json
-        $packagesToAdd = ['package-name' => '^version'];
-        // packages to remove from the package.json
-        $packagesToRemove = ['package-name' => '^version'];
-        return $packagesToAdd + Arr::except($packages, $packagesToRemove);
+        return array_merge([
+            'vuetify' => '^1.0',
+        ], Arr::except($packages, [
+            'bootstrap',
+            'bootstrap-sass',
+            'jquery',
+            'popper.js',
+        ]));
     }
 
     /**
@@ -59,14 +53,10 @@ class VuetifyPreset extends Preset
      */
     protected static function removeSass()
     {
-        // clean up all the files in the sass folder
-        $orphan_sass_files = glob(resource_path('/assets/sass/*.*'));
-
-        foreach($orphan_sass_files as $sass_file)
-        {
-            (new Filesystem)->delete($sass_file);
-        }
-
+        // remove sass assets
+        (new Filesystem)->delete(
+            resource_path('assets/sass')
+        );
     }
 
     /**
@@ -76,29 +66,36 @@ class VuetifyPreset extends Preset
      */
     protected static function updateBootstrapping()
     {
-        // remove exisiting bootstrap.js file
+        (new Filesystem)->delete(
+            base_path('webpack.min.js')
+        );
+        copy(__DIR__.'/vuetify-stubs/webpack.min.js', base_path('webpack.min.js'));
         (new Filesystem)->delete(
             resource_path('assets/js/bootstrap.js')
         );
+        copy(__DIR__.'/vuetify-stubs/js/bootstrap.js', resource_path('assets/js/bootstrap.js'));
+        (new Filesystem)->delete(
+            resource_path('assets/js/app.js')
+        );
+        copy(__DIR__.'/vuetify-stubs/js/app.js', resource_path('assets/js/app.js'));
 
-        // copy a new bootstrap.js file from your stubs folder
-        copy(__DIR__.'/skeleton-stubs/bootstrap.js', resource_path('assets/js/bootstrap.js'));
+        (new Filesystem)->delete(
+            resource_path('assets/js/components/ExampleComponent.vue')
+        );
+        copy(__DIR__.'/vuetify-stubs/js/components/LoginButtonComponent.js', resource_path('assets/js/components/LoginButtonComponent.js'));
+        copy(__DIR__.'/vuetify-stubs/js/components/RegisterButtonComponent.js', resource_path('assets/js/components/RegisterButtonComponent.js'));
     }
 
-    /**
-     * Update the default welcome page file.
-     *
-     * @return void
-     */
     protected static function updateWelcomePage()
     {
-        // remove default welcome page
-        (new Filesystem)->delete(
-            resource_path('views/welcome.blade.php')
-        );
-
-        // copy new one from your stubs folder
-        copy(__DIR__.'/skeleton-stubs/views/welcome.blade.php', resource_path('views/welcome.blade.php'));
+        mkdir(public_path('img'));
+        copy(__DIR__.'/vuetify-tasks/img/hero.jpeg', public_path('img/hero.jpeg'));
+        copy(__DIR__.'/vuetify-tasks/img/hero.jpeg', public_path('img/logo.png'));
+        copy(__DIR__.'/vuetify-tasks/img/hero.jpeg', public_path('img/plane.jpg'));
+        copy(__DIR__.'/vuetify-tasks/img/hero.jpeg', public_path('img/section.jpg'));
+        copy(__DIR__.'/vuetify-tasks/img/hero.jpeg', public_path('img/vuetify.ǹg'));
+        (new Filesystem)->delete(resource_path('views/welcome.blade.php'));
+        copy(__DIR__.'/vuetify-stubs/views/welcome.blade.php', resource_path('views/welcome.blade.php'));
     }
 
     /**
@@ -109,13 +106,13 @@ class VuetifyPreset extends Preset
     protected static function addAuthTemplates()
     {
         // Add Home controller
-        copy(__DIR__.'/stubs-stubs/Controllers/HomeController.php', app_path('Http/Controllers/HomeController.php'));
+        copy(__DIR__.'/vuetify-stubs/Controllers/HomeController.php', app_path('Http/Controllers/HomeController.php'));
 
         // Add Auth routes in 'routes/web.php'
         $auth_route_entry = "Auth::routes();\n\nRoute::get('/home', 'HomeController@index')->name('home');\n\n";
         file_put_contents('./routes/web.php', $auth_route_entry, FILE_APPEND);
 
         // Copy Skeleton auth views from the stubs folder
-        (new Filesystem)->copyDirectory(__DIR__.'/foundation-stubs/views', resource_path('views'));
+        (new Filesystem)->copyDirectory(__DIR__.'/vuetify-stubs/views', resource_path('views'));
     }
 }
