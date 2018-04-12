@@ -1,0 +1,22 @@
+{
+    "name": "laravel-frontend-presets/vuetify",
+    "description": "Laravel 5.5+ Front-end preset for vuetify",
+    "keywords": ["laravel", "preset", "vuetify"],
+    "license": "MIT",
+    "require": {
+        "laravel/framework": "5.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelFrontendPresets\\Vuetify\\": "src/"
+        }
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "LaravelFrontendPresets\\Vuetify\\VuetifyPresetServiceProvider"
+       ]
+      }
+    }
+
+}
