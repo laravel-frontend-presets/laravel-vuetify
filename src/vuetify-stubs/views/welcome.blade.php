@@ -24,16 +24,14 @@
 <body>
 <div id="app">
     <v-app light v-cloak>
+        <snackbar></snackbar>
         <v-toolbar class="white">
             <v-toolbar-title>{{ config('app.name') }}</v-toolbar-title>
-
             @if (Route::has('login'))
                 <v-spacer></v-spacer>
-                <login-button></login-button>
-                <register-button></register-button>
+                <login-button action="{{ $action or null }}"></login-button>
+                <register-button action="{{ $action or null }}"></register-button>
             @endif
-
-
         </v-toolbar>
         <v-content>
             <section>

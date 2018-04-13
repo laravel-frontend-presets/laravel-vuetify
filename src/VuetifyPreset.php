@@ -38,6 +38,7 @@ class VuetifyPreset extends Preset
     {
         return array_merge([
             'vuetify' => '^1.0',
+            'gravatar' => '^1.0',
         ], Arr::except($packages, [
             'bootstrap',
             'bootstrap-sass',

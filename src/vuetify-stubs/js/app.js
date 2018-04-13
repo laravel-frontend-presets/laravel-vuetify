@@ -17,10 +17,23 @@ window.Vue = require('vue');
 
 Vue.component('login-button', require('./components/LoginButtonComponent.vue'));
 Vue.component('register-button', require('./components/RegisterButtonComponent.vue'));
+Vue.component('snackbar', require('./components/SnackBarComponent.vue'));
 
 window.Vuetify = require('vuetify');
 Vue.use(Vuetify)
 
+import store from './store'
+import * as actions from './store/action-types'
+import * as mutations from './store/mutation-types'
+
+import { mapGetters } from 'vuex'
+
+if (window.user ) {
+  store.commit(mutations.USER,  user)
+  store.commit(mutations.LOGGED, true)
+}
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store
 });
