@@ -1,47 +1,19 @@
-Use this repo as a skeleton for your new preset, once you're done please open an issue on [this repo](https://github.com/laravel-frontend-presets/internals).
+# Laravel 5.5+ Frontend preset for Vuetify with Vuex
 
-Here's the latest documentation on Laravel 5.5:
+A Laravel front-end scaffolding preset for [Vuetify](https://vuetifyjs.com/en/) - a Material Design Component Framework with Vue and Vuex.
 
-https://laravel.com/docs/master/
+## Usage
 
-# A Boilerplate repo for presets
+1. Fresh install Laravel 5.5+ and cd to your app: `laravel new app && cd app` 
+2. Install this preset via `composer require laravel-frontend-presets/vuetify`. Laravel 5.5+ will automatically discover this package. No need to register the service provider.
+3. Use `php artisan preset vuetify` for the basic Vuetify frontend preset OR use `php artisan preset vuetify-auth` for the basic preset auth scaffolding in one go. (NOTE: If you run this command several times, be sure to clean up the duplicate Auth entries in `routes/web.php`)
+4. `npm install`
+5. `npm run dev`
+6. Configure your favorite database (mysql, sqlite etc.)
+7. `php artisan migrate` to create basic user tables.
+9. This packages requires [Laravel Passport](https://laravel.com/docs/passport). Run `php artisan passport:install`
+8. `php artisan serve` (or equivalent) to run server and test preset.
 
-This package makes it easy to use [:preset-name](:link-to-website) with Laravel 5.5+.
+### Demo site:
 
-**Note:** Replace ```:preset-name```, ```:link-to-website```, ```:author-name``` and ```:author-username``` on this file, and then delete this line.
-
-**Note:** Make sure you replace all the instances of the word ```skeleton``` or ```Skeleton``` on this file, the `composer.json` file and on the `src/` folder, and to rename the files. You can delete this line after.
-
-This is where your description should go. Add a little code example so build can understand real quick how the package can be used. Try and limit it to a paragraph or two.
-
-
-
-## Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [Credits](#credits)
-- [License](#license)
-
-
-## Installation
-
-To install this preset on your laravel application, simply run:
-
-``` bash
-composer require laravel-frontend-presets/skeleton
-```
-
-## Contributing
-
-Please check our contributing rules in [our website](https://laravel-frontend-presets.github.io) for details.
-
-## Credits
-
-- [:author_name](https://github.com/:author_username)
-- [All Contributors](../../contributors)
-
-## License
-
-The MIT License (MIT).
+- https://laravel-vuetify.acacha.org
