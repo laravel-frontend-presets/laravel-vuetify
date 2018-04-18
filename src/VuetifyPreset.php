@@ -84,12 +84,12 @@ class VuetifyPreset extends Preset
      */
     protected static function updateWelcomePage()
     {
-        mkdir(public_path('img'));
+        if ( ! file_exists(public_path('img'))) mkdir(public_path('img'));
         copy(__DIR__.'/vuetify-stubs/public/img/hero.jpeg', public_path('img/hero.jpeg'));
-        copy(__DIR__.'/vuetify-stubs/public/img/hero.jpeg', public_path('img/logo.png'));
-        copy(__DIR__.'/vuetify-stubs/public/img/hero.jpeg', public_path('img/plane.jpg'));
-        copy(__DIR__.'/vuetify-stubs/public/img/hero.jpeg', public_path('img/section.jpg'));
-        copy(__DIR__.'/vuetify-stubs/public/img/hero.jpeg', public_path('img/vuetify.ǹg'));
+        copy(__DIR__.'/vuetify-stubs/public/img/logo.png', public_path('img/logo.png'));
+        copy(__DIR__.'/vuetify-stubs/public/img/plane.jpg', public_path('img/plane.jpg'));
+        copy(__DIR__.'/vuetify-stubs/public/img/section.jpg', public_path('img/section.jpg'));
+        copy(__DIR__.'/vuetify-stubs/public/img/vuetify.png', public_path('img/vuetify.png'));
         copy(__DIR__.'/vuetify-stubs/resources/views/welcome.blade.php', resource_path('views/welcome.blade.php'));
     }
 
@@ -98,9 +98,9 @@ class VuetifyPreset extends Preset
      */
     protected static function extraFiles()
     {
-        copy(__DIR__.'/vuetify-stubs/.editorconfig', base_path(''));
-        copy(__DIR__.'/vuetify-stubs/.eslintignore', base_path(''));
-        copy(__DIR__.'/vuetify-stubs/.eslinrc.js', base_path(''));
+        copy(__DIR__.'/vuetify-stubs/.editorconfig', base_path('.editorconfig'));
+        copy(__DIR__.'/vuetify-stubs/.eslintignore', base_path('.eslintignore'));
+        copy(__DIR__.'/vuetify-stubs/.eslintrc.js', base_path('.eslintrc.js'));
     }
 
     /**
@@ -121,23 +121,29 @@ class VuetifyPreset extends Preset
         (new Filesystem)->copyDirectory(__DIR__.'/vuetify-stubs/resources/views', resource_path('views'));
 
         //Overwrite default Auth controllers:
-        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/ForgotPasswordController.php', app_path('Http/Controllers/Auth'));
-        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/LoginController.php', app_path('Http/Controllers/Auth'));
-        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/RegisterController.php', app_path('Http/Controllers/Auth'));
-        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/ResetPasswordController.php', app_path('Http/Controllers/Auth'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/ForgotPasswordController.php',
+            app_path('Http/Controllers/Auth/ForgotPasswordController.php'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/LoginController.php',
+            app_path('Http/Controllers/Auth/LoginController.php'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/RegisterController.php',
+            app_path('Http/Controllers/Auth/RegisterController.php'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/ResetPasswordController.php',
+            app_path('Http/Controllers/Auth/ResetPasswordController.php'));
 
         // Add LoggedUserController and test
-        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/LoggedUserController.php', app_path('Http/Controllers'));
-        copy(__DIR__.'/vuetify-stubs/tests/Feature/LoggedUserControllerTest.php', base_path('tests/Feature'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/LoggedUserController.php',
+            app_path('Http/Controllers/LoggedUserController.php'));
+        copy(__DIR__.'/vuetify-stubs/tests/Feature/LoggedUserControllerTest.php',
+            base_path('tests/Feature/LoggedUserControllerTest.php'));
 
         // Add Logged user route in 'routes/api.php'
-        $logged_user_route_entry = "Route::group('['prefix'=>'v1','middleware' => 'auth:api'], function() {\nRoute::put('/user', 'LoggedUserController@update');\n});\n";
+        $logged_user_route_entry = "\nRoute::group(['prefix'=>'v1','middleware' => 'auth:api'], function() {\n\tRoute::put('/user', 'LoggedUserController@update');\n});\n";
         file_put_contents('./routes/api.php', $logged_user_route_entry, FILE_APPEND);
 
         // Laravel Passport
-        copy(__DIR__.'/vuetify-stubs/app/User.php', app_path(''));
-        copy(__DIR__.'/vuetify-stubs/app/Providers/AuthServiceProvider.php', app_path('Providers'));
-        copy(__DIR__.'/vuetify-stubs/config/auth.php', base_path('config'));
-        copy(__DIR__.'/vuetify-stubs/app/Http/Kernel.php', app_path('Http'));
+        copy(__DIR__.'/vuetify-stubs/app/User.php', app_path('User.php'));
+        copy(__DIR__.'/vuetify-stubs/app/Providers/AuthServiceProvider.php', app_path('Providers/AuthServiceProvider.php'));
+        copy(__DIR__.'/vuetify-stubs/config/auth.php', config_path('auth.php'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Kernel.php', app_path('Http/Kernel.php'));
     }
 }
