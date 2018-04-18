@@ -22,9 +22,10 @@ class VuetifyPreset extends Preset
     public static function install($withAuth = false)
     {
         static::updatePackages();
-        static::removeSass(); // or static::updateLess()
+        static::updateSass();
         static::updateBootstrapping();
         static::updateWelcomePage();
+        static::extraFiles();
 
         if($withAuth)
         {
@@ -39,10 +40,12 @@ class VuetifyPreset extends Preset
         return array_merge([
             'vuetify' => '^1.0',
             'gravatar' => '^1.0',
+            'vuex' => '^3.0',
         ], Arr::except($packages, [
             'bootstrap',
             'bootstrap-sass',
             'jquery',
+            'lodash',
             'popper.js',
         ]));
     }
@@ -52,12 +55,9 @@ class VuetifyPreset extends Preset
      *
      * @return void
      */
-    protected static function removeSass()
+    protected static function updateSass()
     {
-        // remove sass assets
-        (new Filesystem)->delete(
-            resource_path('assets/sass')
-        );
+        copy(__DIR__.'/vuetify-stubs/resources/assets/sass/app.scss', resource_path('assets/sass/app.scss'));
     }
 
     /**
@@ -68,35 +68,28 @@ class VuetifyPreset extends Preset
     protected static function updateBootstrapping()
     {
         (new Filesystem)->delete(
-            base_path('webpack.min.js')
+            resource_path('assets/js')
         );
-        copy(__DIR__.'/vuetify-stubs/webpack.min.js', base_path('webpack.min.js'));
-        (new Filesystem)->delete(
-            resource_path('assets/js/bootstrap.js')
-        );
-        copy(__DIR__.'/vuetify-stubs/js/bootstrap.js', resource_path('assets/js/bootstrap.js'));
-        (new Filesystem)->delete(
-            resource_path('assets/js/app.js')
-        );
-        copy(__DIR__.'/vuetify-stubs/js/app.js', resource_path('assets/js/app.js'));
+        (new Filesystem)->copyDirectory(__DIR__.'/vuetify-stubs/resources/assets/js', resource_path('assets/js'));
 
-        (new Filesystem)->delete(
-            resource_path('assets/js/components/ExampleComponent.vue')
-        );
-        copy(__DIR__.'/vuetify-stubs/js/components/LoginButtonComponent.js', resource_path('assets/js/components/LoginButtonComponent.js'));
-        copy(__DIR__.'/vuetify-stubs/js/components/RegisterButtonComponent.js', resource_path('assets/js/components/RegisterButtonComponent.js'));
     }
 
     protected static function updateWelcomePage()
     {
         mkdir(public_path('img'));
-        copy(__DIR__.'/vuetify-tasks/img/hero.jpeg', public_path('img/hero.jpeg'));
-        copy(__DIR__.'/vuetify-tasks/img/hero.jpeg', public_path('img/logo.png'));
-        copy(__DIR__.'/vuetify-tasks/img/hero.jpeg', public_path('img/plane.jpg'));
-        copy(__DIR__.'/vuetify-tasks/img/hero.jpeg', public_path('img/section.jpg'));
-        copy(__DIR__.'/vuetify-tasks/img/hero.jpeg', public_path('img/vuetify.ǹg'));
-        (new Filesystem)->delete(resource_path('views/welcome.blade.php'));
-        copy(__DIR__.'/vuetify-stubs/views/welcome.blade.php', resource_path('views/welcome.blade.php'));
+        copy(__DIR__.'/vuetify-tasks/public/img/hero.jpeg', public_path('img/hero.jpeg'));
+        copy(__DIR__.'/vuetify-tasks/public/img/hero.jpeg', public_path('img/logo.png'));
+        copy(__DIR__.'/vuetify-tasks/public/img/hero.jpeg', public_path('img/plane.jpg'));
+        copy(__DIR__.'/vuetify-tasks/public/img/hero.jpeg', public_path('img/section.jpg'));
+        copy(__DIR__.'/vuetify-tasks/public/img/hero.jpeg', public_path('img/vuetify.ǹg'));
+        copy(__DIR__.'/vuetify-stubs/resources/views/welcome.blade.php', resource_path('views/welcome.blade.php'));
+    }
+
+    protected function extraFiles()
+    {
+        copy(__DIR__.'/vuetify-tasks/.editorconfig', base_path(''));
+        copy(__DIR__.'/vuetify-tasks/.eslintignore', base_path(''));
+        copy(__DIR__.'/vuetify-tasks/.eslinrc.js', base_path(''));
     }
 
     /**
@@ -107,13 +100,33 @@ class VuetifyPreset extends Preset
     protected static function addAuthTemplates()
     {
         // Add Home controller
-        copy(__DIR__.'/vuetify-stubs/Controllers/HomeController.php', app_path('Http/Controllers/HomeController.php'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/HomeController.php', app_path('Http/Controllers/HomeController.php'));
 
         // Add Auth routes in 'routes/web.php'
         $auth_route_entry = "Auth::routes();\n\nRoute::get('/home', 'HomeController@index')->name('home');\n\n";
         file_put_contents('./routes/web.php', $auth_route_entry, FILE_APPEND);
 
         // Copy Skeleton auth views from the stubs folder
-        (new Filesystem)->copyDirectory(__DIR__.'/vuetify-stubs/views', resource_path('views'));
+        (new Filesystem)->copyDirectory(__DIR__.'/vuetify-stubs/resources/views', resource_path('views'));
+
+        //Overwrite default Auth controllers:
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/ForgotPasswordController.php', app_path('Http/Controllers/Auth'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/LoginController.php', app_path('Http/Controllers/Auth'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/RegisterController.php', app_path('Http/Controllers/Auth'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/Auth/ResetPasswordController.php', app_path('Http/Controllers/Auth'));
+
+        // Add LoggedUserController and test
+        copy(__DIR__.'/vuetify-stubs/app/Http/Controllers/LoggedUserController.php', app_path('Http/Controllers'));
+        copy(__DIR__.'/vuetify-stubs/tests/Feature/LoggedUserControllerTest.php', base_path('tests/Feature'));
+
+        // Add Logged user route in 'routes/api.php'
+        $logged_user_route_entry = "Route::group('['prefix'=>'v1','middleware' => 'auth:api'], function() {\nRoute::put('/user', 'LoggedUserController@update');\n});\n";
+        file_put_contents('./routes/api.php', $logged_user_route_entry, FILE_APPEND);
+
+        // Laravel Passport
+        copy(__DIR__.'/vuetify-stubs/app/User.php', app_path(''));
+        copy(__DIR__.'/vuetify-stubs/app/Providers/AuthServiceProvider.php', app_path('Providers'));
+        copy(__DIR__.'/vuetify-stubs/config/auth.php', base_path('config'));
+        copy(__DIR__.'/vuetify-stubs/app/Http/Kernel.php', app_path('Http'));
     }
 }
