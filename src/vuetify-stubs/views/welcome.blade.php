@@ -27,10 +27,15 @@
         <snackbar></snackbar>
         <v-toolbar class="white">
             <v-toolbar-title>{{ config('app.name') }}</v-toolbar-title>
-            @if (Route::has('login'))
+            @if (Route::has('login') && ! Auth::check() )
                 <v-spacer></v-spacer>
-                <login-button action="{{ $action or null }}"></login-button>
-                <register-button action="{{ $action or null }}"></register-button>
+                <login-button action="{{ $action or null }}" ></login-button>
+                <register-button action="{{ $action or null }}" ></register-button>
+                <remember-password action="{{ $action or null }}"></remember-password>
+                <reset-password
+                        action="{{ $action or null }}"
+                        token="{{ $token or null }}"
+                        email="{{ $email or null }}"></reset-password>
             @endif
         </v-toolbar>
         <v-content>
@@ -127,7 +132,7 @@
             </section>
 
             <section>
-                <v-parallax src="img/section.jpg" height="380">
+                <v-parallax src="/img/section.jpg" height="380">
                     <v-layout column align-center justify-center>
                         <div class="headline white--text mb-3 text-xs-center">Web development has never been easier</div>
                         <em>Kick-start your application today</em>
