@@ -85,11 +85,11 @@ class VuetifyPreset extends Preset
     protected static function updateWelcomePage()
     {
         mkdir(public_path('img'));
-        copy(__DIR__.'/vuetify-tasks/public/img/hero.jpeg', public_path('img/hero.jpeg'));
-        copy(__DIR__.'/vuetify-tasks/public/img/hero.jpeg', public_path('img/logo.png'));
-        copy(__DIR__.'/vuetify-tasks/public/img/hero.jpeg', public_path('img/plane.jpg'));
-        copy(__DIR__.'/vuetify-tasks/public/img/hero.jpeg', public_path('img/section.jpg'));
-        copy(__DIR__.'/vuetify-tasks/public/img/hero.jpeg', public_path('img/vuetify.ǹg'));
+        copy(__DIR__.'/vuetify-stubs/public/img/hero.jpeg', public_path('img/hero.jpeg'));
+        copy(__DIR__.'/vuetify-stubs/public/img/hero.jpeg', public_path('img/logo.png'));
+        copy(__DIR__.'/vuetify-stubs/public/img/hero.jpeg', public_path('img/plane.jpg'));
+        copy(__DIR__.'/vuetify-stubs/public/img/hero.jpeg', public_path('img/section.jpg'));
+        copy(__DIR__.'/vuetify-stubs/public/img/hero.jpeg', public_path('img/vuetify.ǹg'));
         copy(__DIR__.'/vuetify-stubs/resources/views/welcome.blade.php', resource_path('views/welcome.blade.php'));
     }
 
@@ -98,9 +98,9 @@ class VuetifyPreset extends Preset
      */
     protected static function extraFiles()
     {
-        copy(__DIR__.'/vuetify-tasks/.editorconfig', base_path(''));
-        copy(__DIR__.'/vuetify-tasks/.eslintignore', base_path(''));
-        copy(__DIR__.'/vuetify-tasks/.eslinrc.js', base_path(''));
+        copy(__DIR__.'/vuetify-stubs/.editorconfig', base_path(''));
+        copy(__DIR__.'/vuetify-stubs/.eslintignore', base_path(''));
+        copy(__DIR__.'/vuetify-stubs/.eslinrc.js', base_path(''));
     }
 
     /**
