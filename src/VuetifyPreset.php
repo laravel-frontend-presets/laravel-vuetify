@@ -1,8 +1,7 @@
 <?php
 
-namespace LaravelFrontendPresets\SkeletonPreset;
+namespace LaravelFrontendPresets\Vuetify;
 
-use Artisan;
 use Illuminate\Support\Arr;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Console\Presets\Preset;
@@ -10,7 +9,7 @@ use Illuminate\Foundation\Console\Presets\Preset;
 /**
  * Class VuetifyPreset.
  *
- * @package LaravelFrontendPresets\SkeletonPreset
+ * @package LaravelFrontendPresets\VuetifyPreset
  */
 class VuetifyPreset extends Preset
 {
@@ -35,6 +34,12 @@ class VuetifyPreset extends Preset
         static::removeNodeModules();
     }
 
+    /**
+     * Update package array.
+     *
+     * @param array $packages
+     * @return array
+     */
     protected static function updatePackageArray(array $packages)
     {
         return array_merge([
@@ -74,6 +79,9 @@ class VuetifyPreset extends Preset
 
     }
 
+    /**
+     * Update welcome page.
+     */
     protected static function updateWelcomePage()
     {
         mkdir(public_path('img'));
@@ -85,7 +93,10 @@ class VuetifyPreset extends Preset
         copy(__DIR__.'/vuetify-stubs/resources/views/welcome.blade.php', resource_path('views/welcome.blade.php'));
     }
 
-    protected function extraFiles()
+    /*
+     * Extra files.
+     */
+    protected static function extraFiles()
     {
         copy(__DIR__.'/vuetify-tasks/.editorconfig', base_path(''));
         copy(__DIR__.'/vuetify-tasks/.eslintignore', base_path(''));
@@ -106,7 +117,7 @@ class VuetifyPreset extends Preset
         $auth_route_entry = "Auth::routes();\n\nRoute::get('/home', 'HomeController@index')->name('home');\n\n";
         file_put_contents('./routes/web.php', $auth_route_entry, FILE_APPEND);
 
-        // Copy Skeleton auth views from the stubs folder
+        // Copy Vuetify auth views from the stubs folder
         (new Filesystem)->copyDirectory(__DIR__.'/vuetify-stubs/resources/views', resource_path('views'));
 
         //Overwrite default Auth controllers:
