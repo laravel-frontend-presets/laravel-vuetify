@@ -62,7 +62,7 @@ class VuetifyPreset extends Preset
      */
     protected static function updateSass()
     {
-        copy(__DIR__.'/vuetify-stubs/resources/assets/sass/app.scss', resource_path('assets/sass/app.scss'));
+        copy(__DIR__.'/vuetify-stubs/resources/sass/app.scss', resource_path('sass/app.scss'));
     }
 
     /**
@@ -73,9 +73,9 @@ class VuetifyPreset extends Preset
     protected static function updateBootstrapping()
     {
         (new Filesystem)->delete(
-            resource_path('assets/js')
+            resource_path('js')
         );
-        (new Filesystem)->copyDirectory(__DIR__.'/vuetify-stubs/resources/assets/js', resource_path('assets/js'));
+        (new Filesystem)->copyDirectory(__DIR__.'/vuetify-stubs/resources/js', resource_path('js'));
 
     }
 
