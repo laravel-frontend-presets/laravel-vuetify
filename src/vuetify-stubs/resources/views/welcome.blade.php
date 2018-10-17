@@ -29,13 +29,13 @@
             <v-toolbar-title>{{ config('app.name') }}</v-toolbar-title>
             @if (Route::has('login') && ! Auth::check() )
                 <v-spacer></v-spacer>
-                <login-button action="{{ $action or null }}" ></login-button>
-                <register-button action="{{ $action or null }}" ></register-button>
-                <remember-password action="{{ $action or null }}"></remember-password>
+                <login-button action="{{ $action ?? null }}" ></login-button>
+                <register-button action="{{ $action ?? null }}" ></register-button>
+                <remember-password action="{{ $action ?? null }}"></remember-password>
                 <reset-password
-                        action="{{ $action or null }}"
-                        token="{{ $token or null }}"
-                        email="{{ $email or null }}"></reset-password>
+                        action="{{ $action ?? null }}"
+                        token="{{ $token ?? null }}"
+                        email="{{ $email ?? null }}"></reset-password>
             @endif
         </v-toolbar>
         <v-content>
