@@ -1,3 +1,5 @@
+Sorry no time to mantain this package: if anyone is interested to mantain it please email me at sergiturbadenas at gmail.com
+
 # Laravel 5.5+ Frontend preset for Vuetify with Vuex
 
 A Laravel front-end scaffolding preset for [Vuetify](https://vuetifyjs.com/en/) - a Material Design Component Framework with Vue and Vuex.
