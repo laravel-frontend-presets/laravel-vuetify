@@ -43,9 +43,11 @@ class VuetifyPreset extends Preset
     protected static function updatePackageArray(array $packages)
     {
         return array_merge([
-            'vuetify' => '^1.0',
+            'vuetify' => '^2.1.13',
             'gravatar' => '^1.0',
-            'vuex' => '^3.0',
+            "vue": "^2.6.10",
+            "vue-template-compiler": "^2.6.10",
+            "vuex": "^3.1.2"
         ], Arr::except($packages, [
             'bootstrap',
             'bootstrap-sass',
