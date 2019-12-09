@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
       "laravel/framework": "^6.0",
-      "laravel/passport": "^8.0"
+      "laravel/passport": "^8.0.2"
     },
     "autoload": {
         "psr-4": {
