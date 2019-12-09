@@ -4,7 +4,9 @@
             v-if="show"
             v-model="showRegister"
             persistent>
-        <v-btn slot="activator">Register</v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn v-on="on">Register</v-btn>
+      </template>
         <v-card>
             <v-card-title>
                 <span class="headline">User registration</span>
@@ -70,7 +72,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click.native="showRegister = false">Close</v-btn>
+                <v-btn color="blue darken-1" text @click.native="showRegister = false">Close</v-btn>
                 <v-btn :loading="registerLoading" color="blue darken-1" class="white--text" @click.native="register">Register</v-btn>
             </v-card-actions>
         </v-card>
