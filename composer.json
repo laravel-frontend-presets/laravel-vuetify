@@ -4,7 +4,7 @@
     "keywords": ["laravel", "preset", "vuetify"],
     "license": "MIT",
     "require": {
-      "laravel/framework": "^5.7",
+      "laravel/framework": "^6.7",
       "laravel/passport": "^7.0"
     },
     "autoload": {
