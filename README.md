@@ -1,4 +1,5 @@
-Sorry no time to mantain this package: if anyone is interested to mantain it please email me at sergiturbadenas at gmail.com
+Let me know if you have any issues, I'll try to update.
+I contacted the original author, but no reply.
 
 # Laravel 6.0+ Frontend preset for Vuetify with Vuex
 
@@ -6,8 +7,8 @@ A Laravel front-end scaffolding preset for [Vuetify](https://vuetifyjs.com/en/) 
 
 ## Usage
 
-1. Fresh install Laravel 5.5+ and cd to your app: `laravel new app && cd app` 
-2. Install this preset via `composer require laravel-frontend-presets/vuetify`. Laravel 5.5+ will automatically discover this package. No need to register the service provider.
+1. Fresh install Laravel 6.0+ and cd to your app: `laravel new app && cd app` 
+2. Install this preset via `composer require laravel-frontend-presets/vuetify`. Laravel 6.0+ will automatically discover this package. No need to register the service provider.
 3. Use `php artisan preset vuetify` for the basic Vuetify frontend preset OR use `php artisan preset vuetify-auth` for the basic preset auth scaffolding in one go. (NOTE: If you run this command several times, be sure to clean up the duplicate Auth entries in `routes/web.php`)
 4. `npm install`
 5. `npm run dev`
