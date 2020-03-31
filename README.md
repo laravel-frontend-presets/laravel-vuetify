@@ -1,4 +1,4 @@
-Sorry no time to mantain this package: if anyone is interested to mantain it please email me at sergiturbadenas at gmail.com
+**Sorry no time to mantain this package: if anyone is interested to mantain it please email me at sergiturbadenas at gmail.com**
 
 # Laravel 5.5+ Frontend preset for Vuetify with Vuex
 
