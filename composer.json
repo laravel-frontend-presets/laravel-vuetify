@@ -1,10 +1,10 @@
 {
     "name": "laravel-frontend-presets/vuetify",
-    "description": "Laravel 5.5+ Front-end preset for vuetify",
+    "description": "Laravel 7.0+ Front-end preset for vuetify",
     "keywords": ["laravel", "preset", "vuetify"],
     "license": "MIT",
     "require": {
-      "laravel/framework": "^6.0",
+      "laravel/framework": "^7.5.2",
       "laravel/passport": "^8.0.2"
     },
     "autoload": {
