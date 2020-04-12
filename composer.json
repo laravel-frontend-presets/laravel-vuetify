@@ -9,13 +9,13 @@
     },
     "autoload": {
         "psr-4": {
-            "LaravelFrontendPresets\\Vuetify\\": "src/"
+            "LaravelFrontendUi\\Vuetify\\": "src/"
         }
     },
     "extra": {
       "laravel": {
         "providers": [
-          "LaravelFrontendPresets\\Vuetify\\VuetifyPresetServiceProvider"
+          "LaravelFrontendUi\\Vuetify\\VuetifyUiServiceProvider"
        ]
       }
     }
