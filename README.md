@@ -1,6 +1,3 @@
-Let me know if you have any issues, I'll try to update.
-I contacted the original author, but no reply.
-
 # Laravel 7.0+ Frontend Ui for Vuetify with Vuex
 
 A Laravel front-end scaffolding preset for [Vuetify](https://vuetifyjs.com/en/) - a Material Design Component Framework with Vue and Vuex.
