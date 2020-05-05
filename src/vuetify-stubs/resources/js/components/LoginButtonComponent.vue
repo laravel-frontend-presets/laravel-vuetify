@@ -4,7 +4,10 @@
             v-model="showLogin"
             persistent max-width="500px"
             :fullscreen="$vuetify.breakpoint.xsOnly">
-        <v-btn color="primary" dark slot="activator">Login</v-btn>
+
+      <template dark v-slot:activator="{ on }">
+        <v-btn color="primary" v-on="on" >Login</v-btn>
+      </template>
 
         <v-card>
             <v-card-title>
@@ -68,7 +71,8 @@
                 <v-spacer></v-spacer>
             </v-card-actions>
         </v-card>
-    </v-dialog>
+    </v-dialog
+            v-show="show">
 </template>
 
 <style scoped>

@@ -1,20 +1,29 @@
-**Sorry no time to mantain this package: if anyone is interested to mantain it please email me at sergiturbadenas at gmail.com**
-
-# Laravel 5.5+ Frontend preset for Vuetify with Vuex
+# Laravel 7.0+ Frontend Ui for Vuetify with Vuex
 
 A Laravel front-end scaffolding preset for [Vuetify](https://vuetifyjs.com/en/) - a Material Design Component Framework with Vue and Vuex.
 
 ## Usage
 
-1. Fresh install Laravel 5.5+ and cd to your app: `laravel new app && cd app` 
-2. Install this preset via `composer require laravel-frontend-presets/vuetify`. Laravel 5.5+ will automatically discover this package. No need to register the service provider.
-3. Use `php artisan preset vuetify` for the basic Vuetify frontend preset OR use `php artisan preset vuetify-auth` for the basic preset auth scaffolding in one go. (NOTE: If you run this command several times, be sure to clean up the duplicate Auth entries in `routes/web.php`)
-4. `npm install`
-5. `npm run dev`
-6. Configure your favorite database (mysql, sqlite etc.)
-7. `php artisan migrate` to create basic user tables.
-9. This packages requires [Laravel Passport](https://laravel.com/docs/passport). Run `php artisan passport:install`
-8. `php artisan serve` (or equivalent) to run server and test preset.
+1. Fresh install Laravel 7.0+ and cd to your app: `laravel new app && cd app` 
+2. Install this preset via `composer require laravel-frontend-presets/vuetify`. Laravel 5.0+ will automatically discover this package. No need to register the service provider. For the moment laravel-frontend-presets/vuetify est juste available with laravel 5.0+
+4. If your need it for you laravel 7, you can add this on your composer.json 
+    ```
+    "repositories": [{ "type": "vcs", "url": "https://github.com/yagami271/laravel-vuetify" }], 
+    "require": { "laravel-frontend-presets/vuetify": "dev-master", } 
+    
+    and run composer update
+    ```
+    
+5. composer require laravel/ui 
+6. Use `php ui  vuetify`
+7. `composer require laravel/passport`
+8. `php artisan migrate`
+9. `php ui vuetify vuetify-auth` 
+10. `npm install`
+11. `npm run dev`
+12. Configure your favorite database (mysql, sqlite etc.)
+13. This packages requires [Laravel Passport](https://laravel.com/docs/passport). Run `php artisan passport:install`
+14. `php artisan serve` (or equivalent) to run server and test preset.
 
 ### Demo site:
 

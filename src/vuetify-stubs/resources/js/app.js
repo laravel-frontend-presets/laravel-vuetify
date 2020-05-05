@@ -1,4 +1,4 @@
-
+import Vuetify from 'vuetify'
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -15,12 +15,12 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('login-button', require('./components/LoginButtonComponent.vue'));
-Vue.component('register-button', require('./components/RegisterButtonComponent.vue'));
-Vue.component('remember-password', require('./components/RememberPasswordComponent.vue'));
-Vue.component('reset-password', require('./components/ResetPasswordComponent.vue'));
-Vue.component('snackbar', require('./components/SnackBarComponent.vue'));
-Vue.component('gravatar', require('./components/GravatarComponent.vue'));
+Vue.component('login-button', require('./components/LoginButtonComponent.vue').default);
+Vue.component('register-button', require('./components/RegisterButtonComponent.vue').default);
+Vue.component('remember-password', require('./components/RememberPasswordComponent.vue').default);
+Vue.component('reset-password', require('./components/ResetPasswordComponent.vue').default);
+Vue.component('snackbar', require('./components/SnackBarComponent.vue').default);
+Vue.component('gravatar', require('./components/GravatarComponent.vue').default);
 
 window.Vuetify = require('vuetify');
 Vue.use(Vuetify)
@@ -40,6 +40,7 @@ if (window.user) {
 const app = new Vue({
   el: '#app',
   store,
+  vuetify: new Vuetify(),
   mixins: [ withSnackbar ],
   data: () => ({
     drawer: null,

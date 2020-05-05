@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
         [v-cloak] > * { display:none; }
         [v-cloak]::before {
@@ -172,30 +172,30 @@
                                     Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
                                 </v-card-text>
                                 <v-list class="transparent">
-                                    <v-list-tile>
-                                        <v-list-tile-action>
+                                    <v-list-item>
+                                        <v-list-item-action>
                                             <v-icon class="blue--text text--lighten-2">phone</v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>777-867-5309</v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                    <v-list-tile>
-                                        <v-list-tile-action>
+                                        </v-list-item-action>
+                                        <v-list-item-content>
+                                            <v-list-item-title>777-867-5309</v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                    <v-list-item>
+                                        <v-list-item-action>
                                             <v-icon class="blue--text text--lighten-2">place</v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>Chicago, US</v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                    <v-list-tile>
-                                        <v-list-tile-action>
+                                        </v-list-item-action>
+                                        <v-list-item-content>
+                                            <v-list-item-title>Chicago, US</v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                    <v-list-item>
+                                        <v-list-item-action>
                                             <v-icon class="blue--text text--lighten-2">email</v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>john@vuetifyjs.com</v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
+                                        </v-list-item-action>
+                                        <v-list-item-content>
+                                            <v-list-item-title>john@vuetifyjs.com</v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
                                 </v-list>
                             </v-card>
                         </v-flex>
