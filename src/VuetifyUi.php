@@ -1,17 +1,15 @@
 <?php
 
-namespace LaravelFrontendPresets\Vuetify;
+namespace LaravelFrontendUi\Vuetify;
 
 use Illuminate\Support\Arr;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\Console\Presets\Preset;
-
 /**
- * Class VuetifyPreset.
+ * Class VuetifyUi.
  *
- * @package LaravelFrontendPresets\VuetifyPreset
+ * @package LaravelFrontendUi\VuetifyUi
  */
-class VuetifyPreset extends Preset
+class VuetifyUi
 {
     /**
      * Install the preset.
@@ -33,6 +31,49 @@ class VuetifyPreset extends Preset
 
         static::removeNodeModules();
     }
+
+    
+
+    /**
+     * Update the "package.json" file.
+     *
+     * @return void
+     */
+    protected static function updatePackages()
+    {
+        if (! file_exists(base_path('package.json'))) {
+            return;
+        }
+
+        $packages = json_decode(file_get_contents(base_path('package.json')), true);
+
+        $packages['devDependencies'] = static::updatePackageArray(
+            $packages['devDependencies']
+        );
+
+        ksort($packages['devDependencies']);
+
+        file_put_contents(
+            base_path('package.json'),
+            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL
+        );
+    }
+
+    /**
+     * Remove the installed Node modules.
+     *
+     * @return void
+     */
+    protected static function removeNodeModules()
+    {
+        tap(new Filesystem, function ($files) {
+            $files->deleteDirectory(base_path('node_modules'));
+
+            $files->delete(base_path('yarn.lock'));
+        });
+    }
+
+
 
     /**
      * Update package array.
